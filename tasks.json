@@ -1,17 +1,1 @@
-[
-  {
-    "text": "Task 1",
-    "done": false,
-    "note": "Note"
-  },
-  {
-    "text": "Task 2",
-    "done": false,
-    "note": ""
-  },
-  {
-    "text": "Task 3",
-    "done": true,
-    "note": ""
-  }
-]
+[]
