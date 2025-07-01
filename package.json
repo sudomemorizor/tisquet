@@ -1,0 +1,41 @@
+{
+  "name": "tisquet",
+  "version": "1.0.0",
+  "description": "A lightweight short-term task management application.",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "keywords": [],
+  "author": "Memorizor",
+  "license": "GPL",
+  "type": "commonjs",
+  "devDependencies": {
+    "electron": "^37.1.0",
+    "electron-builder": "^26.0.12"
+  },
+  "build": {
+    "appId": "com.memorizor.tisquet",
+    "productName": "Tisquet",
+    "files": [
+      "**/*",
+      "!node_modules/.cache",
+      "!dist"
+    ],
+    "extraMetadata": {
+      "main": "main.js"
+    },
+    "directories": {
+      "output": "dist"
+    },
+    "linux": {
+      "target": ["AppImage", "deb", "pacman"],
+      "category": "Utility"
+    },
+    "win": {
+      "target": ["nsis"],
+      "icon": "build/icon.ico"
+    }
+  }
+}
+}

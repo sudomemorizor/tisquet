@@ -1,0 +1,478 @@
+/* Main */
+
+* {
+  box-sizing: border-box;
+}
+
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  padding: 20px;
+  background-color: #1E1E1E;
+  color: white;
+}
+
+h1 {
+  color: white;
+  margin-bottom: 20px;
+}
+
+:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.7);
+  border-radius: 10px;
+}
+
+
+body:not(.user-is-tabbing) :focus {
+  outline: none;
+  box-shadow: none;
+}
+
+/* Task List */
+
+#task-form {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+#task-form input,
+#task-form button {
+  height: 40px;
+  font-size: 16px;
+  padding: 0 12px;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+}
+
+#task-form-controls {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+#task-input {
+  flex: 1;
+  padding: 10px;
+  background-color: #2a2a2a;
+  border: none;
+  color: white;
+  border-radius: 10px;
+  font-size: 16px;
+}
+
+#add-task {
+  padding: 10px 16px;
+  background-color: #45a047;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+#add-task:hover {
+  background-color: #45a047;
+}
+
+#task-list {
+  list-style: none;
+  padding: 0;
+}
+
+.task {
+  background: #2a2a2a;
+  color: white;
+  margin-bottom: 15px;
+  padding: 15px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  max-width: 100%;
+  overflow-wrap: break-word;
+}
+
+.task > div:first-child {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.task span {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.task .note {
+  font-size: 14px;
+  color: #ccc;
+}
+
+.task button {
+  background-color: transparent;
+  color: white;
+  border: none;
+  padding: 0px 5px;
+  font-size: 20px;
+  cursor: pointer;
+  margin-left: 5px;
+}
+
+.icon-adjust {
+  font-size: 1.4em;
+  vertical-align: middle;
+}
+
+.task button.trash i {
+  color: #ff5c5c;
+}
+
+.task button.trash:hover i {
+  color: #ec8080;
+}
+
+.task button.done i {
+  color: #4caf50;
+}
+
+.task button.done:hover i {
+  color: #71df78;
+}
+
+.task button.edit-note i {
+  color: #2196f3;
+}
+
+.task button.edit-note:hover i {
+  color: #56a0e0;
+}
+
+.done-text {
+  text-decoration: line-through;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.done-task {
+  opacity: 0.5; 
+}
+
+#toggle-hide-done {
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  color: white;
+}
+
+#toggle-hide-done i {
+  pointer-events: none;
+  line-height: 1;
+}
+
+/* Note Editor */
+
+.note-editor {
+  margin-top: 10px;
+  padding: 10px;
+  background: transparent;
+  border: none;
+  border-radius: 8px;
+}
+
+.note-editor textarea {
+  font-family: monospace;
+  background-color: #3a3a3a;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  padding: 10px;
+  margin-bottom: 10px;
+  resize: vertical;
+}
+
+.note-editor button {
+  background-color: #4a90e2;
+  border: none;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  margin-right: 5px;
+}
+
+.note-editor button:hover {
+  background-color: #357ab8;
+}
+
+/* Settings Menu */
+
+#settings-toggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: none;
+  border: none;
+  color: rgb(189, 189, 189);
+  font-size: 1.8rem;
+  cursor: pointer;
+  z-index: 1001;
+  transition: color 0.3s;
+}
+
+#settings-toggle:hover {
+  color: #ffffff;
+}
+
+#settings-toggle:focus {
+  outline: none;
+}
+
+#settings-panel {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 50vw;
+  height: 100vh;
+  background-color: #222;
+  color: white;
+  padding: 30px 20px;
+  box-shadow: -4px 0 12px rgba(0, 0, 0, 0.6);
+  transform: translateX(100%);
+  transition: transform 0.3s ease;
+  z-index: 1000;
+  overflow-y: auto;
+}
+
+#settings-panel.active {
+  transform: translateX(0);
+}
+
+#settings-panel h2 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  font-size: 1.6rem;
+}
+
+.switch {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+  font-size: 1rem;
+  cursor: pointer;
+  user-select: none;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.switch .slider {
+  position: relative;
+  width: 50px;
+  height: 24px;
+  background-color: #555;
+  border-radius: 34px;
+  transition: background-color 0.3s;
+  flex-shrink: 0;
+}
+
+.switch .slider::before {
+  content: "";
+  position: absolute;
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  top: 3px;
+  background-color: white;
+  border-radius: 50%;
+  transition: transform 0.3s;
+}
+
+.switch input:checked + .slider {
+  background-color: #4a90e2;
+}
+
+.switch input:checked + .slider::before {
+  transform: translateX(26px);
+}
+
+#close-settings {
+  margin-top: 30px;
+  padding: 10px 16px;
+  background-color: #333;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+#close-settings:hover {
+  background-color: #555;
+}
+
+/* Delete Modal */
+
+.modal {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal.hidden {
+  display: none;
+}
+
+.modal-content {
+  background: #1E1E1E;
+  padding: 20px 30px;
+  border-radius: 8px;
+  max-width: 320px;
+  width: 90%;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+  text-align: center;
+}
+
+.modal-buttons {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.modal-buttons button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+#confirm-delete-btn {
+  background-color: #e74c3c;
+  color: white;
+}
+
+#cancel-delete-btn {
+  background-color: #333;
+  color: white;
+}
+
+/* LIGHT MODE */
+
+body.light-mode {
+  background-color: white;
+  color: black;
+}
+
+body.light-mode h1 {
+  color: black;
+}
+
+body.light-mode #task-input {
+  background-color: #f0f0f0;
+  color: black;
+}
+
+body.light-mode #add-task {
+  background-color: #4caf50;
+  color: white;
+}
+
+body.light-mode #add-task:hover {
+  background-color: #45a047;
+}
+
+body.light-mode .task {
+  background: #eee;
+  color: black;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+}
+
+body.light-mode .task button {
+  color: black;
+}
+
+body.light-mode .task button.trash i {
+  color: #c0392b;
+}
+
+body.light-mode .task button.trash:hover i {
+  color: #e74c3c;
+}
+
+body.light-mode .task button.done i {
+  color: #27ae60;
+}
+
+body.light-mode .task button.done:hover i {
+  color: #2ecc71;
+}
+
+body.light-mode .task button.edit-note i {
+  color: #2980b9;
+}
+
+body.light-mode .note-editor button {
+    color: white;
+}
+
+body.light-mode .task button.edit-note:hover i {
+  color: #3498db;
+}
+
+body.light-mode .done-text {
+  color: rgba(0, 0, 0, 0.4);
+}
+
+body.light-mode .done-task {
+  opacity: 0.6;
+}
+
+body.light-mode #toggle-hide-done {
+  background-color: #eee;
+  color: black;
+  transition: background-color 0.3s;
+}
+
+body.light-mode #toggle-hide-done:hover {
+  background-color: #cfcfcf;
+}
+
+body.light-mode .note-editor textarea {
+  background-color: #fff;
+  color: black;
+  border: 1px solid #ccc;
+}
+
+body.light-mode #settings-panel {
+  background-color: #fff;
+  color: black;
+}
+
+body.light-mode .modal-content {
+  background: white;
+  color: black;
+}

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Task Manager</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+  <h1>Task Manager</h1>
+
+    <button id="settings-toggle" aria-label="Toggle Settings">
+      <i class="fas fa-gear" id="settings-icon"></i>
+    </button>
+
+  <div id="settings-panel">
+    <h2>Settings</h2>
+
+    <label class="switch">
+      <input type="checkbox" id="confirm-delete-toggle" />
+      <span class="slider"></span>
+      Confirm before delete
+    </label>
+
+    <label class="switch">
+      <input type="checkbox" id="dark-mode-toggle" />
+      <span class="slider"></span>
+      Dark mode
+    </label>
+  </div>
+
+  <div id="delete-confirmation-modal" class="modal hidden">
+  <div class="modal-content">
+    <p>Are you sure you want to delete this task?</p>
+    <div class="modal-buttons">
+      <button id="confirm-delete-btn">Delete</button>
+      <button id="cancel-delete-btn">Cancel</button>
+    </div>
+  </div>
+</div>
+
+
+<div id="task-form">
+  <input type="text" id="task-input" placeholder="Add a new task">
+  <button id="add-task">Add Task</button>
+  <button id="toggle-hide-done" title="Hide Done Tasks">
+    <i id="hide-icon" class="fas fa-eye fa-lg"></i>
+  </button>
+</div>
+
+  <ul id="task-list"></ul>
+
+  <script src="renderer.js"></script>
+</body>
+</html>
